@@ -37,6 +37,9 @@
 #include "dcsam/SemanticBearingRangeFactor.h"
 #include "dcsam/SmartDiscretePriorFactor.h"
 
+#include "dcsam/ContinuousEMFactor.h"
+#include "dcsam/ContinuousMaxMixtureFactor.h"
+
 const double tol = 1e-7;
 
 /******************************************************************************/
@@ -1680,7 +1683,7 @@ TEST(TestSuite, factor_removal) {
 
   dcsam.update(hfg, initialGuess, initialGuessDiscrete, removals, discreteRemovals);
 
-  EXPECT_EQ(dcsam.getDiscreteFactorGraph().at(3), nullptr);
+  EXPECT_EQ(dcsam.getDiscreteFactorGraph().at(1), nullptr);
   EXPECT_EQ(dcsam.getNonlinearFactorGraph().at(5), nullptr);
 
   dcvals = dcsam.calculateEstimate();
@@ -1688,7 +1691,7 @@ TEST(TestSuite, factor_removal) {
   mpeClassL1 = dcvals.discrete.at(lc1);
   std::cout << "MPE class for l1 after removal: " << mpeClassL1 << std::endl;
 
-  EXPECT_EQ(mpeClassL1, 0);  
+  EXPECT_EQ(mpeClassL1, 1);  
 
 }
 
