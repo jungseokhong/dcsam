@@ -106,7 +106,7 @@ void DCSAM::update(const gtsam::NonlinearFactorGraph &graph,
                                                     removeFactorIndices);
   currContinuous_ = isam_.calculateEstimate();
   // Update discrete info from last solve and
-  updateDiscrete(discreteCombined, currContinuous_, currDiscrete_);
+  updateDiscreteInfo(currContinuous_, currDiscrete_);
 }
 
 void DCSAM::update(const HybridFactorGraph &hfg,

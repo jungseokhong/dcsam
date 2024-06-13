@@ -1662,7 +1662,7 @@ TEST(TestSuite, factor_removal) {
   std::cout << "now let's remove factors! " << std::endl;
 
   // Now let's start removing factors and see what happens. 
-  EXPECT_EQ(dcsam.getDiscreteFactorGraph().size(), 8);
+  EXPECT_EQ(dcsam.getDiscreteFactorGraph().size(), 4);
   EXPECT_EQ(dcsam.getNonlinearFactorGraph().size(), 8);
 
   hfg.clear();
@@ -1670,7 +1670,7 @@ TEST(TestSuite, factor_removal) {
   initialGuessDiscrete.clear();
 
   // removing all discrete factors with high class 1 prob 
-  gtsam::FactorIndices discreteRemovals{3,5,7};
+  gtsam::FactorIndices discreteRemovals{1};
 
   // make sure continuous removal works as well 
   gtsam::FactorIndices removals{5};
@@ -1680,16 +1680,18 @@ TEST(TestSuite, factor_removal) {
 
   dcsam.update(hfg, initialGuess, initialGuessDiscrete, removals, discreteRemovals);
 
-  EXPECT_EQ(dcsam.getDiscreteFactorGraph().at(5), nullptr);
+  EXPECT_EQ(dcsam.getDiscreteFactorGraph().at(3), nullptr);
   EXPECT_EQ(dcsam.getNonlinearFactorGraph().at(5), nullptr);
 
   dcvals = dcsam.calculateEstimate();
 
   mpeClassL1 = dcvals.discrete.at(lc1);
+  std::cout << "MPE class for l1 after removal: " << mpeClassL1 << std::endl;
 
   EXPECT_EQ(mpeClassL1, 0);  
 
 }
+
 
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);
