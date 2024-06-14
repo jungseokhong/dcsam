@@ -119,6 +119,16 @@ void DCSAM::update(const HybridFactorGraph &hfg,
          removeFactorIndices, removeDiscreteFactorIndices);
 }
 
+void DCSAM::update_remove(const HybridFactorGraph &hfg,
+                   const gtsam::FactorIndices &removeFactorIndices,
+                   const gtsam::Values &initialGuessContinuous,
+                   const DiscreteValues &initialGuessDiscrete,
+                   const gtsam::FactorIndices &removeDiscreteFactorIndices) {
+  update(hfg.nonlinearGraph(), hfg.discreteGraph(), hfg.dcGraph(), 
+         initialGuessContinuous, initialGuessDiscrete, 
+         removeFactorIndices, removeDiscreteFactorIndices);
+}
+
 void DCSAM::update() {
   update(gtsam::NonlinearFactorGraph(), gtsam::DiscreteFactorGraph(),
          DCFactorGraph());
