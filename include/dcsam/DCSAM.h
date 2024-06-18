@@ -107,23 +107,6 @@ class DCSAM {
                                                             gtsam::FactorIndices());
 
   /**
-   * A HybridFactorGraph is a container holding a NonlinearFactorGraph, a
-   * DiscreteFactorGraph, and a DCFactorGraph, so internally this function
-   * simply issues a call to `update` with these internal graphs passed as
-   * parameters: that is:
-   *
-   * update(hfg.nonlinearGraph(), hfg.discreteGraph(), hfg.dcGraph(),
-   * initialGuess, removeFactorIndices, removeDiscreteFactorIndices);
-   */
-  void update_remove(const HybridFactorGraph &hfg,
-              const gtsam::FactorIndices &removeFactorIndices =
-                                                     gtsam::FactorIndices(),
-              const gtsam::Values &initialGuessContinuous = gtsam::Values(),
-              const DiscreteValues &initialGuessDiscrete = DiscreteValues(),
-              const gtsam::FactorIndices &removeDiscreteFactorIndices = 
-                                                            gtsam::FactorIndices());
-
-  /**
    * Inline convenience function to allow "skipping" the initial guess for
    * continuous variables while adding an initial guess for discrete variables.
    */
